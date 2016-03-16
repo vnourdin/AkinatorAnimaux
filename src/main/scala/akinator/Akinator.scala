@@ -10,30 +10,22 @@ object Akinator {
 
   case class Question(q: String, oui: ABanimal, non: ABanimal) extends ABanimal
 
-  def fichierToABanimal(nomf:String):ABanimal = {
+
+  def fichierToABanimal(nomf: String): ABanimal = {
     val l = Source.fromFile(nomf).getLines().toList
-    
-    def aux(l:List[String]) : (ABanimal,List[String]) = l match {
-      case Nil => throw new Exception("Un animal ne peut être vide")
-      case t::q if(t.indexOf("q :")!=(-1)) => {
-        val (ani,list) = aux(q)
-        val (ani2,list2) = aux(list)
-        (new Question(t,ani,ani2),list2) }
-      case t::q if(t.indexOf("q :")==(-1)) => (new Animal(t),q)
-     }
-    
-    val (a,liste) = aux(l)
-    a
+
+    def aux(l: List[String]): (ABanimal, List[String]) = l match {
+      case Nil => throw new Exception("Un arbre binaire plein n'a pas de noeud vide")
+      case t :: q if t.startsWith("q :") =>
+        val (abanimalG, listG) = aux(q)
+        val (abanimalD, listD) = aux(listG)
+        (new Question(t, abanimalG, abanimalD), listD)
+      case t :: q => (new Animal(t), q)
     }
-  
-  /*
-  def ABanimalToFichier(ab: ABanimal) {
-    val writer = new FileWriter(new File("coucou.txt"))
-    writer.write("coucou\n")
-    
-    
-    writer.close()
-  }*/
+    val (a, liste) = aux(l)
+
+    a
+  }
 
   def jeuSimple(a: ABanimal, it: Iterator[String]): Boolean = a match {
     case Question(q: String, oui: ABanimal, non: ABanimal) if (it.next().equals("o")) => jeuSimple(oui, it)
