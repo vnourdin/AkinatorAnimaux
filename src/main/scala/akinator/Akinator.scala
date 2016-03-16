@@ -10,14 +10,21 @@ object Akinator {
 
   case class Question(q: String, oui: ABanimal, non: ABanimal) extends ABanimal
 
-  def fichierToABanimal(nomFichier: String): ABanimal = {
-    val listeFichier = Source.fromFile(nomFichier).getLines.toList
+  def fichierToABanimal(nomf:String):ABanimal = {
+    val l = Source.fromFile(nomf).getLines().toList
     
-    def ajouterFils(acc: ABanimal, listeAb: List[String]): ABanimal = listeAb match {
-      case Nil => acc
-      case t::q if(t.startsWith("q:")) => 
+    def aux(l:List[String]) : (ABanimal,List[String]) = l match {
+      case Nil => throw new Exception("Un animal ne peut être vide")
+      case t::q if(t.indexOf("q :")!=(-1)) => {
+        val (ani,list) = aux(q)
+        val (ani2,list2) = aux(list)
+        (new Question(t,ani,ani2),list2) }
+      case t::q if(t.indexOf("q :")==(-1)) => (new Animal(t),q)
+     }
+    
+    val (a,liste) = aux(l)
+    a
     }
-  }
   
   /*
   def ABanimalToFichier(ab: ABanimal) {
