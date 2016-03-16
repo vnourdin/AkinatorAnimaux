@@ -19,7 +19,7 @@ object Akinator {
       case t :: q if t.startsWith("q :") =>
         val (abanimalG, listG) = aux(q)
         val (abanimalD, listD) = aux(listG)
-        (new Question(t, abanimalG, abanimalD), listD)
+        (new Question(t.substring(3), abanimalG, abanimalD), listD)
       case t :: q => (new Animal(t), q)
     }
     val (a, liste) = aux(l)
