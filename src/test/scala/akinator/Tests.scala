@@ -14,4 +14,8 @@ class Tests extends FunSuite {
   test("fichierToABanimal") {
     assert(fichierToABanimal("arbre") == arbreTemoin)
   }
+  
+  test("ABanimalToFichier"){
+    assert(ABanimalToFichier(arbreTemoin) == )
+  }
 }

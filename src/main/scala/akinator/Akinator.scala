@@ -31,7 +31,12 @@ object Akinator {
     import java.io._
     val writer = new FileWriter(new File("coucou.txt"))
     writer.write("coucou\n")
-
+    def aux(ab:ABanimal):Unit = ab match{
+      case Animal(nom: String) => writer.write(nom)
+      case Question(q: String, oui: ABanimal, non: ABanimal) => writer.write(q)
+        aux(oui)
+        aux(non)
+    }
     writer.close()
   }
 
