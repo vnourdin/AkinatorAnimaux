@@ -1,5 +1,7 @@
 package akinator
 
+import java.io._
+
 import scala.io.Source
 
 object Akinator {
@@ -28,18 +30,19 @@ object Akinator {
   }
 
   def ABanimalToFichier(cheminVersFichier: String, arbre: ABanimal): Unit = {
-    import java.io._
     val writer = new FileWriter(new File(cheminVersFichier))
-    def aux(ab:ABanimal):Unit = ab match{
-      case Animal(nom: String) => writer.write(nom)
-      case Question(q: String, oui: ABanimal, non: ABanimal) => writer.write(q)
+
+    def aux(ab: ABanimal): Unit = ab match {
+      case Animal(nom: String) => writer.write(nom + "\n")
+      case Question(q: String, oui: ABanimal, non: ABanimal) => writer.write("q :" + q + "\n")
         aux(oui)
         aux(non)
     }
+    aux(arbre)
     writer.close()
   }
 
-  def jeuSimple(a: ABanimal, it: Iterator[String]): Boolean = a match {
+  def jeuSimple(arbre: ABanimal, it: Iterator[String]): Boolean = arbre match {
     case Question(q: String, oui: ABanimal, non: ABanimal) if (it.next().equals("o")) => jeuSimple(oui, it)
     case Question(q: String, oui: ABanimal, non: ABanimal) if (it.next().equals("n")) => jeuSimple(non, it)
     case Animal(nom: String) if (it.next().equals("o")) => true
