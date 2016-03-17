@@ -21,4 +21,12 @@ class Tests extends FunSuite {
     ABanimalToFichier("arbreFromAnimal", arbreTemoin)
     assert(Source.fromFile("arbre").getLines().toList == Source.fromFile("arbreFromAnimal").getLines().toList)
   }
+
+  test("jeuSimpleDepuisString") {
+    assert(jeuSimple(arbreTemoin, new String("n\no").lines) == true)
+  }
+
+  test("jeuSimpleDepuisClavier") {
+    assert(jeuSimple(arbreTemoin) == true)
+  }
 }

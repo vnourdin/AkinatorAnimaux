@@ -42,10 +42,17 @@ object Akinator {
     writer.close()
   }
 
-  def jeuSimple(arbre: ABanimal, it: Iterator[String]): Boolean = arbre match {
-    case Question(q: String, oui: ABanimal, non: ABanimal) if (it.next().equals("o")) => jeuSimple(oui, it)
-    case Question(q: String, oui: ABanimal, non: ABanimal) if (it.next().equals("n")) => jeuSimple(non, it)
-    case Animal(nom: String) if (it.next().equals("o")) => true
-    case Animal(nom: String) if (it.next().equals("n")) => false
+  def jeuSimple(arbre: ABanimal, it: Iterator[String]): Boolean = {
+    val prochain = it.next()
+    arbre match {
+      case Question(q: String, oui: ABanimal, non: ABanimal) if (prochain.equals("o")) => jeuSimple(oui, it)
+      case Question(q: String, oui: ABanimal, non: ABanimal) if (prochain.equals("n")) => jeuSimple(non, it)
+      case Animal(nom: String) if (prochain.equals("o")) => true
+      case Animal(nom: String) if (prochain.equals("n")) => false
+    }
+  }
+
+  def jeuSimple(arbre: ABanimal): Boolean = {
+    jeuSimple(arbre, Source.stdin.getLines)
   }
 }
