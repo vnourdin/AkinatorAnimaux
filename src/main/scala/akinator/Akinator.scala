@@ -55,4 +55,9 @@ object Akinator {
   def jeuSimple(arbre: ABanimal): Boolean = {
     jeuSimple(arbre, Source.stdin.getLines)
   }
+
+  def jeuLog(arbre: ABanimal, it: Iterator[String]): List[String] = {
+    jeuSimple(arbre, it)
+    it.toList
+  }
 }
