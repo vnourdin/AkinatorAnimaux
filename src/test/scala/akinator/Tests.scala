@@ -3,6 +3,7 @@ package arbres
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
+import scala.io.Source
 
 @RunWith(classOf[JUnitRunner])
 class Tests extends FunSuite {
@@ -16,6 +17,7 @@ class Tests extends FunSuite {
   }
   
   test("ABanimalToFichier"){
-    assert(ABanimalToFichier(arbreTemoin) == )
+    ABanimalToFichier("arbreFromAnimal",arbreTemoin)
+    assert(Source.fromFile("arbre").getLines().toList ==  Source.fromFile("arbreFromAnimal").getLines().toList)
   }
 }
