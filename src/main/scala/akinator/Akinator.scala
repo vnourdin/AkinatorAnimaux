@@ -45,10 +45,10 @@ object Akinator {
   def jeuSimple(arbre: ABanimal, it: Iterator[String]): Boolean = {
     val prochain = it.next()
     arbre match {
-      case Question(q: String, oui: ABanimal, non: ABanimal) if (prochain.equals("o")) => jeuSimple(oui, it)
-      case Question(q: String, oui: ABanimal, non: ABanimal) if (prochain.equals("n")) => jeuSimple(non, it)
-      case Animal(nom: String) if (prochain.equals("o")) => true
-      case Animal(nom: String) if (prochain.equals("n")) => false
+      case Question(q: String, oui: ABanimal, non: ABanimal) if prochain.equals("o") => jeuSimple(oui, it)
+      case Question(q: String, oui: ABanimal, non: ABanimal) if prochain.equals("n") => jeuSimple(non, it)
+      case Animal(nom: String) if prochain.equals("o") => true
+      case Animal(nom: String) if prochain.equals("n") => false
     }
   }
 
