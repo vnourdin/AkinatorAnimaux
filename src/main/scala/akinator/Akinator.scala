@@ -67,7 +67,13 @@ object Akinator {
       case Question(q: String, oui: ABanimal, non: ABanimal) if prochain.equals("o") => jeuSimple(oui, it)
       case Question(q: String, oui: ABanimal, non: ABanimal) if prochain.equals("n") => jeuSimple(non, it)
       case Animal(nom: String) if prochain.equals("o") => true 
-      case Animal(nom: String) if prochain.equals("n") => false
+      case Animal(nom: String) if prochain.equals("n") => 
+        print("J'ai perdu - quelle est la bonne réponse ?")
+        val rep = new Animal(Source.stdin.getLines.next());
+        print("Quelle question permet de différencier "+rep.nom+" de "+nom+" ?")
+        val question = Source.stdin.getLines.next();
+        print("Quelle est la réponse à cette question pour "+
+        new Question(
     }
   }
   
