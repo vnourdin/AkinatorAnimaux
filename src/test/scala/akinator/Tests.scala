@@ -28,8 +28,9 @@ class Tests extends FunSuite {
     assert(jeuSimple(arbreTemoin, new String("o\nn\no").lines))
     assert(!jeuSimple(arbreTemoin, new String("o\no\nn").lines))
   }
-
-  /*test("jeuSimpleDepuisClavier") {
+  /*
+  test("jeuSimpleDepuisClavier") {
     assert(jeuSimple(arbreTemoin) == true)
-  }*/
+  }
+  */
 }

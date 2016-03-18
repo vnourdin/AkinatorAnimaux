@@ -42,28 +42,27 @@ object Akinator {
     writer.close()
   }
 
-  def jeuSimple(arbre: ABanimal, it: Iterator[String]): Boolean = {
-    val prochain = it.next()
-    arbre match {
-      case Question(q: String, oui: ABanimal, non: ABanimal) if prochain.equals("o") =>
-        System.out.println(q)
-        System.out.println(prochain)
+  def jeuSimple(arbre: ABanimal, it: Iterator[String]): Boolean = arbre match {
+    case Question(q: String, oui: ABanimal, non: ABanimal) =>
+      System.out.println(q)
+      val reponse = it.next()
+      System.out.println(reponse)
+      if (reponse.equals("o"))
         jeuSimple(oui, it)
-      case Question(q: String, oui: ABanimal, non: ABanimal) if prochain.equals("n") =>
-        System.out.println(q)
-        System.out.println(prochain)
+      else
         jeuSimple(non, it)
-      case Animal(nom: String) if prochain.equals("o") =>
-        System.out.println("Pensez-vous à : " + nom)
-        System.out.println(prochain)
-        System.out.println("J'ai gagné !\n\n")
+    case Animal(nom: String) =>
+      System.out.println("Pensez-vous à : " + nom)
+      val reponse = it.next()
+      System.out.println(reponse)
+      if (reponse.equals("o")) {
+        System.out.println("J'ai gagné =)\n\n")
         true
-      case Animal(nom: String) if prochain.equals("n") =>
-        System.out.println("Pensez-vous à : " + nom)
-        System.out.println(prochain)
+      }
+      else {
         System.out.println("J'ai perdu =(\n\n")
         false
-    }
+      }
   }
 
   def jeuSimple(arbre: ABanimal): Boolean = {
