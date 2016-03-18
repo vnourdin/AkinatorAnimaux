@@ -60,4 +60,19 @@ object Akinator {
     jeuSimple(arbre, it)
     it.toList
   }
+  
+  def jeuApprentissage(a:ABanimal, it:Iterator[String]):ABanimal = {
+    val prochain = it.next()
+    a match {
+      case Question(q: String, oui: ABanimal, non: ABanimal) if prochain.equals("o") => jeuSimple(oui, it)
+      case Question(q: String, oui: ABanimal, non: ABanimal) if prochain.equals("n") => jeuSimple(non, it)
+      case Animal(nom: String) if prochain.equals("o") => true 
+      case Animal(nom: String) if prochain.equals("n") => false
+    }
+  }
+  
+  def jeuSimpleJNSP(a:ABanimal, it:Iterator[String]):Boolean = {
+    
+  }
+  
 }
