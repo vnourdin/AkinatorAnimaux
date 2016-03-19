@@ -48,12 +48,14 @@ object Akinator {
     def aux(arbre: ABanimal, it: Iterator[String]): Boolean = arbre match {
       case Question(q: String, oui: ABanimal, non: ABanimal) =>
         System.out.println(q)
+        System.out.print("> ")
         if (it.next().equals("o"))
           aux(oui, it)
         else
           aux(non, it)
       case Animal(nom: String) =>
         System.out.println("Pensez-vous à : " + nom + "?")
+        System.out.print("> ")
         if (it.next().equals("o")) {
           System.out.println("J'ai gagné =)")
           true
@@ -77,12 +79,14 @@ object Akinator {
     def aux(arbre: ABanimal, it: Iterator[String]): List[String] = arbre match {
       case Question(q: String, oui: ABanimal, non: ABanimal) =>
         System.out.println(q)
+        System.out.print("> ")
         if (it.next().equals("o"))
           q :: "o" :: aux(oui, it)
         else
           q :: "n" :: aux(non, it)
       case Animal(nom: String) =>
         System.out.println("Pensez-vous à : " + nom + "?")
+        System.out.print("> ")
         if (it.next().equals("o")) {
           System.out.println("J'ai gagné =)")
           List(nom, "o", "J'ai gagné =)")
@@ -103,24 +107,29 @@ object Akinator {
     def aux(arbre: ABanimal, it: Iterator[String]): ABanimal = arbre match {
       case Question(q: String, oui: ABanimal, non: ABanimal) =>
         System.out.println(q)
+        System.out.print("> ")
         if (it.next().equals("o"))
           new Question(q, aux(oui, it), non)
         else
           new Question(q, oui, aux(non, it))
       case Animal(nom: String) =>
         System.out.println("Pensez-vous à : " + nom)
+        System.out.print("> ")
         if (it.next().equals("o")) {
           System.out.println("J'ai gagné =)")
           arbre
         }
         else {
           System.out.println("J'ai perdu - quelle est la bonne réponse ?")
+          System.out.print("> ")
           val bonneRep = it.next()
 
           System.out.println("Quelle question permet de différencier " + bonneRep + " de " + nom + "?")
+          System.out.print("> ")
           val nouvelleQuestion = it.next()
 
           System.out.println("Quelle est la réponse à cette question pour " + bonneRep + "?")
+          System.out.print("> ")
 
           if (it.next().equals("o"))
             new Question(nouvelleQuestion, new Animal(bonneRep), arbre)
@@ -153,6 +162,7 @@ object Akinator {
         }
       case Animal(nom: String) =>
         System.out.println("Pensez-vous à : " + nom + "?")
+        System.out.print("> ")
         if (it.next().equals("o")) {
           System.out.println("J'ai gagné =)")
           true
@@ -177,6 +187,7 @@ object Akinator {
     def aux(arbre: ABanimal): Unit = {
       val nouvelArbre = arbre
       System.out.println("\nVoulez-vous jouer : \n\t1/ au jeu simple\n\t2/ au jeu par apprentissage\n\t3/ au jeu avec je ne sais pas\n\tq/ quitter")
+      System.out.print("> ")
       val choix = it.next().toUpperCase
 
       if (choix.equals("1")) {
@@ -196,7 +207,8 @@ object Akinator {
         aux(arbre)
       }
 
-      System.out.print("Voulez-vous rejouer ? ")
+      System.out.println("Voulez-vous rejouer ? ")
+      System.out.print("> ")
       if (it.next().equals("o"))
         aux(nouvelArbre)
       else
