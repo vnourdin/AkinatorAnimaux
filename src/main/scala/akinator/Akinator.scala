@@ -74,9 +74,9 @@ object Akinator {
     case Question(q: String, oui: ABanimal, non: ABanimal) =>
       System.out.println(q)
       if (it.next().equals("o"))
-        jeuApprentissage(oui, it)
+        new Question(q, jeuApprentissage(oui, it), non)
       else
-        jeuApprentissage(non, it)
+        new Question(q, oui, jeuApprentissage(non, it))
     case Animal(nom: String) =>
       System.out.println("Pensez-vous à : " + nom)
       if (it.next().equals("o")) {
