@@ -65,9 +65,23 @@ object Akinator {
     jeuSimple(arbre, Source.stdin.getLines)
   }
 
-  def jeuLog(arbre: ABanimal, it: Iterator[String]): List[String] = {
-    jeuSimple(arbre, it)
-    it.toList
+  def jeuLog(arbre: ABanimal, it: Iterator[String]): List[String] = arbre match {
+    case Question(q: String, oui: ABanimal, non: ABanimal) =>
+      System.out.println(q)
+      if (it.next().equals("o"))
+        q :: "o" :: jeuLog(oui, it)
+      else
+        q :: "n" :: jeuLog(non, it)
+    case Animal(nom: String) =>
+      System.out.println("Pensez-vous à : " + nom + "?")
+      if (it.next().equals("o")) {
+        System.out.println("J'ai gagné =)\n\n")
+        List(nom, "o", "J'ai gagné =)")
+      }
+      else {
+        System.out.println("J'ai perdu =(\n\n")
+        List(nom, "n", "J'ai perdu =(")
+      }
   }
 
   def jeuApprentissage(arbre: ABanimal, it: Iterator[String]): ABanimal = arbre match {
