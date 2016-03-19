@@ -22,15 +22,18 @@ class Tests extends FunSuite {
     assert(Source.fromFile("arbre").getLines().toList == Source.fromFile("arbreFromAnimal").getLines().toList)
   }
 
-  test("jeuSimpleDepuisString") {
+  test("jeuSimple depuis String") {
     assert(jeuSimple(arbreTemoin, new String("n\no").lines))
     assert(!jeuSimple(arbreTemoin, new String("n\nn").lines))
     assert(jeuSimple(arbreTemoin, new String("o\nn\no").lines))
     assert(!jeuSimple(arbreTemoin, new String("o\no\nn").lines))
   }
   /*
-  test("jeuSimpleDepuisClavier") {
+  test("jeuSimple depuis clavier") {
     assert(jeuSimple(arbreTemoin) == true)
   }
   */
+  test("jeuLog") {
+    System.out.println(jeuLog(arbreTemoin, new String("n\no").lines))
+  }
 }

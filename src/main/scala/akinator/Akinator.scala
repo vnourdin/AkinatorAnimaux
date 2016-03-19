@@ -45,17 +45,13 @@ object Akinator {
   def jeuSimple(arbre: ABanimal, it: Iterator[String]): Boolean = arbre match {
     case Question(q: String, oui: ABanimal, non: ABanimal) =>
       System.out.println(q)
-      val reponse = it.next()
-      System.out.println(reponse)
-      if (reponse.equals("o"))
+      if (it.next().equals("o"))
         jeuSimple(oui, it)
       else
         jeuSimple(non, it)
     case Animal(nom: String) =>
-      System.out.println("Pensez-vous à : " + nom)
-      val reponse = it.next()
-      System.out.println(reponse)
-      if (reponse.equals("o")) {
+      System.out.println("Pensez-vous à : " + nom + "?")
+      if (it.next().equals("o")) {
         System.out.println("J'ai gagné =)\n\n")
         true
       }
@@ -74,23 +70,36 @@ object Akinator {
     it.toList
   }
 
-  /*
-    def jeuApprentissage(a: ABanimal, it: Iterator[String]): ABanimal = {
-      val prochain = it.next()
-      a match {
-        case Question(q: String, oui: ABanimal, non: ABanimal) if prochain.equals("o") => jeuApprentissage(oui, it)
-        case Question(q: String, oui: ABanimal, non: ABanimal) if prochain.equals("n") => jeuApprentissage(non, it)
-        case Animal(nom: String) if prochain.equals("o") => true
-        case Animal(nom: String) if prochain.equals("n") =>
-          print("J'ai perdu - quelle est la bonne réponse ?")
-          val rep = new Animal(Source.stdin.getLines.next());
-          print("Quelle question permet de différencier " + rep.nom + " de " + nom + " ?")
-          val question = Source.stdin.getLines.next();
-          print("Quelle est la réponse à cette question pour " +
-            new Question(
+  def jeuApprentissage(arbre: ABanimal, it: Iterator[String]): ABanimal = arbre match {
+    case Question(q: String, oui: ABanimal, non: ABanimal) =>
+      System.out.println(q)
+      if (it.next().equals("o"))
+        jeuApprentissage(oui, it)
+      else
+        jeuApprentissage(non, it)
+    case Animal(nom: String) =>
+      System.out.println("Pensez-vous à : " + nom)
+      if (it.next().equals("o")) {
+        System.out.println("J'ai gagné =)\n\n")
+        arbre
       }
-    }
+      else {
+        System.out.println("J'ai perdu - quelle est la bonne réponse ?\n\n")
+        val bonneRep = it.next()
 
-    def jeuSimpleJNSP(a: ABanimal, it: Iterator[String]): Boolean = {
-    }*/
+        System.out.println("Quelle question permet de différencier " + bonneRep + " de " + nom + "?")
+        val nouvelleQuestion = it.next()
+
+        System.out.println("Quelle est la réponse à cette question pour " + bonneRep + "?")
+
+        if (it.next().equals("o"))
+          new Question(nouvelleQuestion, new Animal(bonneRep), arbre)
+        else
+          new Question(nouvelleQuestion, arbre, new Animal(bonneRep))
+      }
+  }
+
+  /*
+  def jeuSimpleJNSP(a: ABanimal, it: Iterator[String]): Boolean = {
+  }*/
 }
