@@ -42,6 +42,7 @@ object Akinator {
   }
 
   def jeuSimple(arbre: ABanimal, it: Iterator[String]): Boolean = {
+    System.out.println("\nC'est la version basique du jeu, vous devez répondre \"o\" ou \"n\" et laisser Akinator trouver l'animal auquel vous pensez.")
     System.out.print("\nPensez à un animal - ")
 
     def aux(arbre: ABanimal, it: Iterator[String]): Boolean = arbre match {
@@ -70,6 +71,7 @@ object Akinator {
   }
 
   def jeuLog(arbre: ABanimal, it: Iterator[String]): List[String] = {
+    System.out.println("\nCette version du jeu enregistre la partie dans une liste.")
     System.out.print("\nPensez à un animal - ")
 
     def aux(arbre: ABanimal, it: Iterator[String]): List[String] = arbre match {
@@ -94,6 +96,8 @@ object Akinator {
   }
 
   def jeuApprentissage(arbre: ABanimal, it: Iterator[String]): ABanimal = {
+    System.out.println("\nDans cette version, Akinator cherche à découvrir de nouveaux animaux." +
+      "\nLorsqu'il ne trouve pas l'animal auquel vous pensez, il vous propose de lui faire connaitre.")
     System.out.print("\nPensez à un animal - ")
 
     def aux(arbre: ABanimal, it: Iterator[String]): ABanimal = arbre match {
@@ -132,6 +136,7 @@ object Akinator {
   }
 
   def jeuSimpleJNSP(arbre: ABanimal, it: Iterator[String]): Boolean = {
+    System.out.println("\nDans cette version du jeu, vous pouvez répondre \"x\" pour dire que vous ne connaissez pas la réponse à la question posée.")
     System.out.print("\nPensez à un animal - ")
 
     def aux(arbre: ABanimal, it: Iterator[String]): Boolean = arbre match {
@@ -166,8 +171,8 @@ object Akinator {
   def main(args: Array[String]): Unit = {
     val it = Source.stdin.getLines
     System.out.println("Voici Akinator version Animaux." +
-      "Ce programme est conçu pour deviner à quel animal vous pensez." +
-      "\nRépondez aux questions par \"o\" ou \"n\" et s'il ne trouve pas à quoi vous pensez, vous pouvez lui apprendre.")
+      " Ce programme est conçu pour deviner à quel animal vous pensez." +
+      "\nRépondez aux questions par \"o\" ou \"n\" et s'il trouve à quoi vous pensez, c'est qu'il à très bien été programmé.")
 
     def aux(arbre: ABanimal): Unit = {
       val nouvelArbre = arbre
