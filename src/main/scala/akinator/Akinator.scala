@@ -25,7 +25,6 @@ object Akinator {
       case t :: q => (new Animal(t), q)
     }
     val (arbreResultat, liste) = aux(l)
-
     arbreResultat
   }
 
@@ -63,10 +62,8 @@ object Akinator {
           false
         }
     }
-
     aux(arbre, it)
   }
-
 
   def jeuSimple(arbre: ABanimal): Boolean = {
     jeuSimple(arbre, Source.stdin.getLines)
@@ -93,7 +90,6 @@ object Akinator {
           List(nom, "n", "J'ai perdu =(")
         }
     }
-
     aux(arbre, it)
   }
 
@@ -128,8 +124,11 @@ object Akinator {
             new Question(nouvelleQuestion, arbre, new Animal(bonneRep))
         }
     }
-
     aux(arbre, it)
+  }
+
+  def jeuApprentissage(arbre: ABanimal): ABanimal = {
+    jeuApprentissage(arbre, Source.stdin.getLines)
   }
 
   def jeuSimpleJNSP(arbre: ABanimal, it: Iterator[String]): Boolean = {
@@ -157,7 +156,21 @@ object Akinator {
           false
         }
     }
-
     aux(arbre, it)
+  }
+
+  def main(args: Array[String]): Unit = {
+    val it = Source.stdin.getLines
+
+    def aux(arbre: ABanimal): Unit = {
+      val arbreRetour = jeuApprentissage(arbre)
+      System.out.print("Voulez-vous rejouer ? ")
+      if (it.next() == "o")
+        aux(arbreRetour)
+      else
+        ABanimalToFichier("arbreParDefaut", arbreRetour)
+    }
+
+    aux(fichierToABanimal("arbreParDefaut"))
   }
 }

@@ -14,12 +14,12 @@ class Tests extends FunSuite {
   val arbreTemoin = Question("Est-ce qu’il a des ailes ?", Question("Est-ce qu’il a des plumes ?", Animal("Pélican"), Animal("Chauve-souris")), Animal("Chien"))
 
   test("fichierToABanimal") {
-    assert(fichierToABanimal("arbre") == arbreTemoin)
+    assert(fichierToABanimal("arbrePourTests") == arbreTemoin)
   }
 
   test("ABanimalToFichier") {
     ABanimalToFichier("arbreFromAnimal", arbreTemoin)
-    assert(Source.fromFile("arbre").getLines().toList == Source.fromFile("arbreFromAnimal").getLines().toList)
+    assert(Source.fromFile("arbrePourTests").getLines().toList == Source.fromFile("arbreFromAnimal").getLines().toList)
   }
 
   test("jeuSimple depuis String") {
@@ -28,11 +28,7 @@ class Tests extends FunSuite {
     assert(jeuSimple(arbreTemoin, new String("o\nn\no").lines))
     assert(!jeuSimple(arbreTemoin, new String("o\no\nn").lines))
   }
-  /*
-  test("jeuSimple depuis clavier") {
-    assert(jeuSimple(arbreTemoin) == true)
-  }
-  */
+
   test("jeuLog") {
     System.out.println(jeuLog(arbreTemoin, new String("n\no").lines))
   }
