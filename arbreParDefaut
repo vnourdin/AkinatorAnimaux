@@ -1,7 +1,13 @@
 q :Est-ce qu’il a des ailes ?
 q :Est-ce qu’il a des plumes ?
+q :Est-il un poème de Baudelaire ?
+Albatros
 Pélican
 q :Est-ce qu'il se déplace en volant ?
 Chauve-souris
 Pinguin
+q :Est-il le meilleur ami de l'homme ?
 Chien
+q :Vit-il dans l'océan ?
+Requin
+Chat

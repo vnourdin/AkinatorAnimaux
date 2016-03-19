@@ -159,16 +159,43 @@ object Akinator {
     aux(arbre, it)
   }
 
+  def jeuSimpleJNSP(arbre: ABanimal): Boolean = {
+    jeuSimpleJNSP(arbre, Source.stdin.getLines)
+  }
+
   def main(args: Array[String]): Unit = {
     val it = Source.stdin.getLines
+    System.out.println("Voici Akinator version Animaux." +
+      "Ce programme est conçu pour deviner à quel animal vous pensez." +
+      "\nRépondez aux questions par \"o\" ou \"n\" et s'il ne trouve pas à quoi vous pensez, vous pouvez lui apprendre.")
 
     def aux(arbre: ABanimal): Unit = {
-      val arbreRetour = jeuApprentissage(arbre)
+      val nouvelArbre = arbre
+      System.out.println("\nVoulez-vous jouer : \n\t1/ au jeu simple\n\t2/ au jeu par apprentissage\n\t3/ au jeu avec je ne sais pas\n\tq/ quitter")
+      val choix = it.next().toUpperCase
+
+      if (choix.equals("1")) {
+        jeuSimple(arbre)
+      }
+      else if (choix.equals("2")) {
+        val nouvelArbre = jeuApprentissage(arbre)
+      }
+      else if (choix.equals("3")) {
+        jeuSimpleJNSP(arbre)
+      }
+      else if (choix.equals("Q")) {
+        ABanimalToFichier("arbreParDefaut", nouvelArbre)
+        System.exit(0)
+      }
+      else {
+        aux(arbre)
+      }
+
       System.out.print("Voulez-vous rejouer ? ")
-      if (it.next() == "o")
-        aux(arbreRetour)
+      if (it.next().equals("o"))
+        aux(nouvelArbre)
       else
-        ABanimalToFichier("arbreParDefaut", arbreRetour)
+        ABanimalToFichier("arbreParDefaut", nouvelArbre)
     }
 
     aux(fichierToABanimal("arbreParDefaut"))
