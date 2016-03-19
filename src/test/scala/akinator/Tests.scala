@@ -43,4 +43,8 @@ class Tests extends FunSuite {
   test("jeuApprentissage") {
     assert(jeuApprentissage(arbreTemoin, new String("o\no\nn\nPigeon\nEst-ce qu’il a un goitre ?\nn").lines) == arbreTemoinApprentissage)
   }
+  
+  test("jeuJeNeSaisPas"){
+    assert(jeuSimpleJNSP(arbreTemoin, new String("o\nx\nx\nn\nn\n\no\no").lines) == true);
+  }
 }

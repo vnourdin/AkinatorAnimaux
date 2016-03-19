@@ -99,7 +99,35 @@ object Akinator {
       }
   }
 
-  /*
-  def jeuSimpleJNSP(a: ABanimal, it: Iterator[String]): Boolean = {
-  }*/
+  
+  def jeuSimpleJNSP(a: ABanimal, it: Iterator[String]): Boolean = a match {
+    case Question(q: String, oui: ABanimal, non: ABanimal) =>
+      System.out.println(q)
+      if(it.next().equals("x")){
+        jeuSimpleJNSP(oui,it)
+        jeuSimpleJNSP(non,it)
+      }else{
+        if (it.next().equals("o"))
+          jeuSimpleJNSP(oui, it)
+        else
+          jeuSimpleJNSP(non, it)
+      }
+    case Animal(nom: String) =>
+      System.out.println("Pensez-vous à : " + nom + "?")
+        if (it.next().equals("o")) {
+          System.out.println("J'ai gagné =)\n\n")
+          true
+        }
+        else {
+          System.out.println("J'ai perdu =(\n\n")
+          false
+        }
+  }
+  
+  
+  
+  
+  
+  
+  
 }
