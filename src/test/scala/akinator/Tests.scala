@@ -30,7 +30,7 @@ class Tests extends FunSuite {
   }
 
   test("jeuLog") {
-    System.out.println(jeuLog(arbreTemoin, new String("n\no").lines))
+    assert(jeuLog(arbreTemoin, new String("n\no").lines) == List("Est-ce qu’il a des ailes ?", "n", "Pensez-vous à : Chien?", "o", "J'ai gagné =)"))
   }
 
   val arbreTemoinApprentissage = Question("Est-ce qu’il a des ailes ?", Question("Est-ce qu’il a des plumes ?",

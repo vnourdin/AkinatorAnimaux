@@ -89,11 +89,11 @@ object Akinator {
         System.out.print("> ")
         if (it.next().equals("o")) {
           System.out.println("J'ai gagné =)")
-          List(nom, "o", "J'ai gagné =)")
+          List(("Pensez-vous à : " + nom + "?"), "o", "J'ai gagné =)")
         }
         else {
           System.out.println("J'ai perdu =(")
-          List(nom, "n", "J'ai perdu =(")
+          List(("Pensez-vous à : " + nom + "?"), "n", "J'ai perdu =(")
         }
     }
     aux(arbre, it)
