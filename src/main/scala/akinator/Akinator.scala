@@ -143,7 +143,7 @@ object Akinator {
   def jeuApprentissage(arbre: ABanimal): ABanimal = {
     jeuApprentissage(arbre, Source.stdin.getLines)
   }
-
+ 
   def jeuSimpleJNSP(arbre: ABanimal, it: Iterator[String]): Boolean = {
     System.out.println("\nDans cette version du jeu, vous pouvez répondre \"x\" pour dire que vous ne connaissez pas la réponse à la question posée.")
     System.out.print("\nPensez à un animal - ")
