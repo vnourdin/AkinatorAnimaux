@@ -139,8 +139,10 @@ object Akinator {
       case Question(q: String, oui: ABanimal, non: ABanimal) =>
         System.out.println(q)
         if (it.next().equals("x")) {
-          aux(oui, it)
-          aux(non, it)
+          if(!aux(oui, it))
+            aux(non, it)
+          else
+            true;
         } else {
           if (it.next().equals("o"))
             aux(oui, it)
